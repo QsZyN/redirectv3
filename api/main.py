@@ -5,11 +5,13 @@ import re
 app = Flask(__name__)
 
 
-@app.route("/<path:raw_string>")
-def get_raw_path(raw_string):
-    if ":/" not in raw_string:
-        abort(400, description=f"Invalid URI: '://' is missing {raw_string}")
-    return redirect(re.sub(r'(?<!:):/', r'://', raw_string), code=307)
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def catch_all(path):
+    url = re.sub(r":/(?!/)", r"://", request.full_path[1:])
+    if "://" not in url:
+        abort(400, description=f"Invalid URI: '://' is missing {url}")
+    return redirect(url, code=307)
 
 
 if __name__ == "__main__":
