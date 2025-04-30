@@ -1,6 +1,7 @@
 # redirectv3
 
-`https://redirectv3-i978.vercel.app/{URI}`
+
+[https://redirectv3-i978.vercel.app/](https://redirectv3-i978.vercel.app/){URI}
 
 Just put URI behind it.
 No need to encode URIs
